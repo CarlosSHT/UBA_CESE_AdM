@@ -1,16 +1,16 @@
 Preguntas orientadoras
 1. Describa brevemente los diferentes perfiles de familias de microprocesadores/microcontroladores de ARM. Explique alguna de sus diferencias características.
 
-Cortex A - Destinado para aplicaciones, no posee la caracteristica de tiempo real 
-Cortex R - 
-Cortex M -
+Cortex A - Destinado para aplicaciones donde las demoras en ejecutar una aplicación no es de gran importancia, no posee la caracteristica de tiempo real. Poseen memoria cache.
+Cortex R - Destinado para RTOS, el sistema atiende tareas en tiempos determinados, baja latencia y alto procesamiento. No tienen memoria cache
+Cortex M - Destinado a microcontroladores, de bajo costo y menor consumo en comparación con los Cortex A, poseen ciertos periféricos, memoria interna. La familia M4 en adelante puede implementar RTOS.
 
 
 
 Cortex M
 1.	Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4.
 
-Arquitecturas diferentes entre las familias M0, M3 y M4.
+Arquitecturas diferentes entre las familias M0 (Von Neumann), M3 (Harvard) y M4 (Harvard).
 La familia M0 es de bajo consumo a diferencia de M3 y M4, por otro lado, la familia M4 puede implementar bien el sistema RTOS en cambio el M0 realiza implementaciones por software.
 Poseen diferentes tamaños de instrucción en M0 de 16 bits y en M4 con capacidad de 32 bits
 
