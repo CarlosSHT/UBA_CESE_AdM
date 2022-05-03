@@ -1,12 +1,32 @@
 Preguntas orientadoras
 1. Describa brevemente los diferentes perfiles de familias de microprocesadores/microcontroladores de ARM. Explique alguna de sus diferencias características.
+
+Cortex A - Destinado para aplicaciones, no posee la caracteristica de tiempo real 
+Cortex R - 
+Cortex M -
+
+
+
 Cortex M
 1.	Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4.
+
+Arquitecturas diferentes entre las familias M0, M3 y M4.
+La familia M0 es de bajo consumo a diferencia de M3 y M4, por otro lado, la familia M4 puede implementar bien el sistema RTOS en cambio el M0 realiza implementaciones por software.
+Poseen diferentes tamaños de instrucción en M0 de 16 bits y en M4 con capacidad de 32 bits
+
+
+
 2.	¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique
+
+Debido a que se añaden instrucciones de 16 bits lo que permite tener mayor cantidad de código, es decir tener mayor densidad. 
+
 3.	¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura?
 4.	¿Cómo es el mapa de memoria de la familia?
 5.	¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
 6.	Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado.
+
+Tareas en modo privilegiado tiene acceso total, en cambio el modo no privilegiado debe pedir permisos al sistema operativo lo cual brinda un aislamiento y protege el sistema.
+
 7.	¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo
 8.	¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo
 9.	Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
