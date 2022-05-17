@@ -14,25 +14,32 @@ Arquitecturas diferentes entre las familias M0 (Von Neumann), M3 (Harvard) y M4 
 La familia M0 es de bajo consumo a diferencia de M3 y M4, por otro lado, la familia M4 puede implementar bien el sistema RTOS en cambio el M0 realiza implementaciones por software.
 Poseen diferentes tamaños de instrucción en M0 de 16 bits y en M4 con capacidad de 32 bits
 
-
-
 2.	¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique
 
 Debido a que se añaden instrucciones de 16 bits lo que permite tener mayor cantidad de código, es decir tener mayor densidad. 
 
 3.	¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura?
+
+Las instrucciones no pueden realizar operaciones directamente al área de memoria, en cambio, accede a los datos a traves de dos registros que se encargan de bajar de la memoria al registro y posteriomente subir del registro a la memoria.
+
 4.	¿Cómo es el mapa de memoria de la familia?
 
 Tiene un tamaño acorde a la capacidad obtenida al ser de 32bits (2^32=4GB). Las areas de memoria que posee son para el código (flash), memoria ram, memoría de periféricos, SRAM externa, sistema
 En el mapa de memoria se encuentra todo "mapeado" es decir se podría configurar y obtener completamente el sistema, por ejemplo, los periféricos
 
 5.	¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
+
+Presenta ventajas para realizar la implementación de sistemas operativos en tiempo real
+
 6.	Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado.
 
 Tareas en modo privilegiado tiene acceso total, en cambio el modo no privilegiado debe pedir permisos al sistema operativo lo cual brinda un aislamiento y protege el sistema.
 
 
 7.	¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo
+
+Casi todos los registros son para uso de proposito general que funcionan como parametros para las instrucciones.
+
 8.	¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo
 9.	Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
 10.	Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?
@@ -53,6 +60,8 @@ Sirve de protección a areas definidas que ante algún error o ejecución intenc
 19.	¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas?
 20.	¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo
 21.	¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.
+
+
 ISA
 1.	¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo
 2.	¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo
