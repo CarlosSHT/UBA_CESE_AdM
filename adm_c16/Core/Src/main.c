@@ -388,7 +388,9 @@ void zeros(uint32_t *vector, uint32_t longitud) {
 }
 
 void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t longitud, uint32_t escalar) {
-
+	for (int var = 0; var < longitud; ++var) {
+		*(vectorOut + var) = *(vectorIn + var) * escalar;
+	}
 }
 
 void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut,
