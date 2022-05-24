@@ -390,7 +390,7 @@ void zeros(uint32_t *vector, uint32_t longitud) {
 
 void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t longitud, uint32_t escalar) {
 	for (uint32_t var = 0; var < longitud; ++var) {
-		*(vectorOut + var) = *(vectorIn + var) * escalar;
+		*(vectorOut + var*4) = *(vectorIn + var*4) * escalar;
 	}
 }
 
@@ -398,7 +398,7 @@ void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t longitu
 // Supuesto ingresa 32 bits
 void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar) {
 	for (uint32_t var = 0; var < longitud; ++var) {
-		*(vectorOut + var) = *(vectorIn + var*2) * escalar;
+		*(vectorOut + var*2) = *(vectorIn + var*2) * escalar;
 	}
 }
 
@@ -406,7 +406,10 @@ void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitu
 // Supuesto ingresa 32 bits
 void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut,uint32_t longitud, uint16_t escalar) {
 	for (uint32_t var = 0; var < longitud; ++var) {
-		*(vectorOut + var) =( *(vectorIn + var*2) * escalar ) & 0b0000111111111111;
+		*(vectorOut + var*2) = *(vectorIn + var*2) * escalar;
+		if ((*(vectorOut + var*2))>=0b0000111111111111) {
+			*(vectorOut + var*2)=0b0000111111111111;
+		}
 	}
 }
 
