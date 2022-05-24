@@ -382,24 +382,24 @@ static void MX_GPIO_Init(void) {
 /* USER CODE BEGIN 4 */
 
 void zeros(uint32_t *vector, uint32_t longitud) {
-	for (int var = 0; var < longitud; ++var) {
+	for (uint32_t var = 0; var < longitud; ++var) {
 		*(vector + var) = 0;
 	}
 }
 
 void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t longitud, uint32_t escalar) {
-	for (int var = 0; var < longitud; ++var) {
+	for (uint32_t var = 0; var < longitud; ++var) {
 		*(vectorOut + var) = *(vectorIn + var) * escalar;
 	}
 }
 
-void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut,
-		uint32_t longitud, uint16_t escalar) {
-
+void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar) {
+	for (uint32_t var = 0; var < longitud; ++var) {
+		*(vectorOut + var) = *(vectorIn + var) * escalar;
+	}
 }
 
-void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut,
-		uint32_t longitud, uint16_t escalar) {
+void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut,uint32_t longitud, uint16_t escalar) {
 
 }
 /* USER CODE END 4 */
