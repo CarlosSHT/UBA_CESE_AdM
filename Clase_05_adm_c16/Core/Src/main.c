@@ -162,22 +162,27 @@ int main(void)
   uint32_t vectorOUT_32b[5]={0};
 
   const uint16_t vectorIN_16b[]={50000,227,23761,2226,5399};
-  uint16_t vectorOUT_16[5]={0};
+  uint16_t vectorOUT_16b[5]={0};
 
-  const uint16_t vectorIN_12b[]={3089,3442,327,2221,1794};
+  const uint16_t vectorIN_12b[]={327,3442,327,2221,1794};
   uint16_t vectorOUT_12b[5]={0};
 
-  zeros(&vectorIN_zeros_32bit, 3);
+//  zeros(&vectorIN_zeros_32bit, 3);
 
-  productoEscalar32(&vectorIN_32b, &vectorOUT_32b, 4, 2);
-
-  productoEscalar16(&vectorIN_16b, &vectorOUT_16, 3, 4);
-
-  productoEscalar12(&vectorIN_12b, &vectorOUT_12b, 5, 4);
+//  productoEscalar32(&vectorIN_32b, &vectorOUT_32b, 4, 2);
+//
+//  productoEscalar16(&vectorIN_16b, &vectorOUT_16, 3, 4);
+//
+//  productoEscalar12(&vectorIN_12b, &vectorOUT_12b, 5, 4);
 
   PrivilegiosSVC ();
 
   const uint32_t Resultado = asm_sum (5, 3);
+
+  asm_zeros(&vectorIN_zeros_32bit, 3);
+  asm_productoEscalar32(&vectorIN_32b, &vectorOUT_32b, 4, 2);
+  asm_productoEscalar16(&vectorIN_16b, &vectorOUT_16b, 4, 2);
+  asm_productoEscalar12(&vectorIN_12b, &vectorOUT_12b, 5, 4);
   /* USER CODE END 2 */
 
   /* Infinite loop */
