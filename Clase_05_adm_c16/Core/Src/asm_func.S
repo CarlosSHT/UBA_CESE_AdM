@@ -104,11 +104,11 @@
     	bpl .nosatura
     	mov r5,4095
     .nosatura:
-    	mov r6,#0x0FFF
-    	and r5,r5,r6
+    	@mov r6,#0x0FFF
+    	@and r5,r5,r6
     	strh r5,[r1],2
     	subs r2,1
         bne .asm_productoEscalar12_loop
-        pop {r5}
         pop {r6}
+        pop {r5}
         bx lr
