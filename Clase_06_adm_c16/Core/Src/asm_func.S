@@ -9,6 +9,13 @@
 .global asm_productoEscalar32
 .global asm_productoEscalar16
 .global asm_productoEscalar12
+.global asm_filtroVentana10
+.global asm_pack32to16
+.global asm_max
+.global asm_downsampleM
+.global asm_invertir
+
+
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 @ Prototipo en "C":
@@ -111,4 +118,35 @@
         bne .asm_productoEscalar12_loop
         pop {r6}
         pop {r5}
+        bx lr
+
+
+@ Preguntas 5-9
+
+
+
+
+
+.thumb_func
+    asm_invertir:
+    	push {r4} // longitud mitad
+    	push {r5}	// nro 2
+    	push {r6}	// nro 2
+    	mov r5,2
+    	mov r6,0
+    	udiv r4,r1,r5
+    	.asm_invertir_loop:
+    		mov r5,2
+	    	subs r1,1
+	    	mul r5,r1,r5
+	    	ldrh r2,[r0,r6]
+	    	ldrh r3,[r0,r5]
+	    	strh r2,[r0,r5]
+	    	strh r3,[r0,r6]
+	    	add r6,2
+    		subs r4,1
+    		bne .asm_invertir_loop
+        pop {r6}
+        pop {r5}
+        pop {r4}
         bx lr

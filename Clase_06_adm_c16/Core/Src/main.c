@@ -196,7 +196,7 @@ int main(void) {
 			833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562};
 	int32_t vectorOUT_P08[sizeof(vectorIN_P08) / sizeof(int32_t)] = { 0 };
 
-	uint16_t vectorIN_P09[] = { 947, 1111, 2026, 1362};//, 195, 2569, 757, 253, 295,
+	uint16_t vectorIN_P09[] = { 947, 1111, 2026, 1362, 195, 2569, 757};//, 253, 295,
 //			833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562};
 //  zeros(&vectorIN_zeros_32bit, 3);
 
@@ -216,7 +216,8 @@ int main(void) {
 
 	downsampleM(vectorIN_P08,vectorOUT_P08, sizeof(vectorIN_P08) / sizeof(int32_t), 0);
 
-	invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
+//	invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
+
 
 	PrivilegiosSVC();
 
@@ -226,6 +227,7 @@ int main(void) {
 	asm_productoEscalar32(vectorIN_32b, vectorOUT_32b, 4, 2);
 	asm_productoEscalar16(vectorIN_16b, vectorOUT_16b, 4, 2);
 	asm_productoEscalar12(vectorIN_12b, vectorOUT_12b, 5, 4);
+	asm_invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
