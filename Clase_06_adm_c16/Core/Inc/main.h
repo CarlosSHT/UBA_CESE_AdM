@@ -31,7 +31,7 @@ extern "C" {
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-#include "exercises_list01.h"
+#include <exercises_list.h>
 /* USER CODE END Includes */
 
 /* Exported types ------------------------------------------------------------*/

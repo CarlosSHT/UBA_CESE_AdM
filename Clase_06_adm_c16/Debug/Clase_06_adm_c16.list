@@ -9,43 +9,43 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
   2 .rodata       00000018  08003660  08003660  00013660  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  3 .ARM.extab    00000000  08003678  08003678  000201fc  2**0
+  3 .ARM.extab    00000000  08003678  08003678  00020238  2**0
                   CONTENTS
   4 .ARM          00000008  08003678  08003678  00013678  2**2
                   CONTENTS, ALLOC, LOAD, READONLY, DATA
-  5 .preinit_array 00000000  08003680  08003680  000201fc  2**0
+  5 .preinit_array 00000000  08003680  08003680  00020238  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   6 .init_array   00000004  08003680  08003680  00013680  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   7 .fini_array   00000004  08003684  08003684  00013684  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  8 .data         000001fc  20000000  08003688  00020000  2**2
+  8 .data         00000238  20000000  08003688  00020000  2**2
                   CONTENTS, ALLOC, LOAD, DATA
-  9 .ccmram       00000000  10000000  10000000  000201fc  2**0
+  9 .ccmram       00000000  10000000  10000000  00020238  2**0
                   CONTENTS
- 10 .bss          00000930  200001fc  200001fc  000201fc  2**2
+ 10 .bss          0000096c  20000238  20000238  00020238  2**2
                   ALLOC
- 11 ._user_heap_stack 00000604  20000b2c  20000b2c  000201fc  2**0
+ 11 ._user_heap_stack 00000604  20000ba4  20000ba4  00020238  2**0
                   ALLOC
- 12 .ARM.attributes 00000030  00000000  00000000  000201fc  2**0
+ 12 .ARM.attributes 00000030  00000000  00000000  00020238  2**0
                   CONTENTS, READONLY
- 13 .debug_line   0000c9d7  00000000  00000000  0002022c  2**0
+ 13 .debug_line   0000c9cf  00000000  00000000  00020268  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_info   0000f2c4  00000000  00000000  0002cc03  2**0
+ 14 .debug_info   0000f2c4  00000000  00000000  0002cc37  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_abbrev 00001dce  00000000  00000000  0003bec7  2**0
+ 15 .debug_abbrev 00001dce  00000000  00000000  0003befb  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_aranges 00000b98  00000000  00000000  0003dc98  2**3
+ 16 .debug_aranges 00000b98  00000000  00000000  0003dcd0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_str    000d9d20  00000000  00000000  0003e830  2**0
+ 17 .debug_str    000d9d1e  00000000  00000000  0003e868  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_ranges 00000ad0  00000000  00000000  00118550  2**3
+ 18 .debug_ranges 00000ad0  00000000  00000000  00118588  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .debug_macro  00023bde  00000000  00000000  00119020  2**0
+ 19 .debug_macro  00023bde  00000000  00000000  00119058  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 20 .comment      00000050  00000000  00000000  0013cbfe  2**0
+ 20 .comment      00000050  00000000  00000000  0013cc36  2**0
                   CONTENTS, READONLY
- 21 .debug_frame  0000307c  00000000  00000000  0013cc50  2**2
+ 21 .debug_frame  0000307c  00000000  00000000  0013cc88  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -62,7 +62,7 @@ Disassembly of section .text:
  80001be:	2301      	movs	r3, #1
  80001c0:	7023      	strb	r3, [r4, #0]
  80001c2:	bd10      	pop	{r4, pc}
- 80001c4:	200001fc 	.word	0x200001fc
+ 80001c4:	20000238 	.word	0x20000238
  80001c8:	00000000 	.word	0x00000000
  80001cc:	08003648 	.word	0x08003648
 
@@ -75,7 +75,7 @@ Disassembly of section .text:
  80001da:	f3af 8000 	nop.w
  80001de:	bd08      	pop	{r3, pc}
  80001e0:	00000000 	.word	0x00000000
- 80001e4:	20000200 	.word	0x20000200
+ 80001e4:	2000023c 	.word	0x2000023c
  80001e8:	08003648 	.word	0x08003648
 
 080001ec <asm_svc>:
@@ -250,12 +250,12 @@ Disassembly of section .text:
  8000276:	fb05 f502 	mul.w	r5, r5, r2
     			sub r4, r4, r5	@ r4 = r4 (long+ven-2) MOD r5 (div*long)
  800027a:	eba4 0405 	sub.w	r4, r4, r5
-				mov r5,4		@ r5 = 4 bytes
- 800027e:	f04f 0504 	mov.w	r5, #4
-	    		mul r5, r4, r5	@ r5 = indice = MOD * r7 ( 4bytes)
+				mov r5,2		@ r5 = 2 bytes
+ 800027e:	f04f 0502 	mov.w	r5, #2
+	    		mul r5, r4, r5	@ r5 = indice = MOD * r7 ( 2bytes)
  8000282:	fb04 f505 	mul.w	r5, r4, r5
-	    		ldr r5, [r0, r5]
- 8000286:	5945      	ldr	r5, [r0, r5]
+	    		ldrh r5, [r0, r5]
+ 8000286:	5b45      	ldrh	r5, [r0, r5]
     			add r6, r5
  8000288:	442e      	add	r6, r5
     			subs r7, 1
@@ -263,16 +263,16 @@ Disassembly of section .text:
 	    		bne .asm_filtroVentana10_loop_2
  800028c:	d1ed      	bne.n	800026a <.asm_filtroVentana10_loop_2>
 
-	    	mov r5, 4			@ r5 carga valor bytes en 32bits = 4
- 800028e:	f04f 0504 	mov.w	r5, #4
-	    	mul r5, r3, r5		@ r5 r3 ( indice actual vector ) * r5 ( 4 bytes )
+	    	mov r5, 2			@ r5 carga valor bytes en 16bits = 2
+ 800028e:	f04f 0502 	mov.w	r5, #2
+	    	mul r5, r3, r5		@ r5 r3 ( indice actual vector ) * r5 ( 2 bytes )
  8000292:	fb03 f505 	mul.w	r5, r3, r5
-	    	sub r5, 4			@ r5 disminuido en 4 (4 bytes)
- 8000296:	f1a5 0504 	sub.w	r5, r5, #4
+	    	sub r5, 2			@ r5 disminuido en 2 (2 bytes)
+ 8000296:	f1a5 0502 	sub.w	r5, r5, #2
 			udiv r6, r8			@ r6 = r6(acumulación) / r8(tamaño ventana)
  800029a:	fbb6 f6f8 	udiv	r6, r6, r8
-    		str r6,[r1,r5]		@ r6 vectorOut actualizado
- 800029e:	514e      	str	r6, [r1, r5]
+    		strh r6,[r1,r5]		@ r6 vectorOut actualizado
+ 800029e:	534e      	strh	r6, [r1, r5]
 			subs r3,1
  80002a0:	3b01      	subs	r3, #1
     		bne .asm_filtroVentana10_loop_1
@@ -627,7 +627,7 @@ Disassembly of section .text:
  80005ee:	bf00      	nop
 
 080005f0 <zeros>:
-#include "exercises_list01.h"
+#include <exercises_list.h>
 
 /*
  * Ejercicio 01
@@ -1457,8 +1457,8 @@ int main(void) {
  8000a5a:	f7ff fbe8 	bl	800022e <asm_productoEscalar12>
 
 	/********** ASM Pregunta 05 **********/
-	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05, sizeof(ASMvectorIN_P05) / sizeof(uint32_t));
- 8000a5e:	2209      	movs	r2, #9
+	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05, sizeof(ASMvectorIN_P05) / sizeof(uint16_t));
+ 8000a5e:	222f      	movs	r2, #47	; 0x2f
  8000a60:	4913      	ldr	r1, [pc, #76]	; (8000ab0 <main+0x10c>)
  8000a62:	4814      	ldr	r0, [pc, #80]	; (8000ab4 <main+0x110>)
  8000a64:	f7ff fbf6 	bl	8000254 <asm_filtroVentana10>
@@ -1480,21 +1480,21 @@ int main(void) {
  8000a70:	e7fe      	b.n	8000a70 <main+0xcc>
  8000a72:	bf00      	nop
  8000a74:	20000000 	.word	0x20000000
- 8000a78:	20000218 	.word	0x20000218
+ 8000a78:	20000254 	.word	0x20000254
  8000a7c:	20000014 	.word	0x20000014
- 8000a80:	2000022c 	.word	0x2000022c
+ 8000a80:	20000268 	.word	0x20000268
  8000a84:	20000028 	.word	0x20000028
- 8000a88:	20000238 	.word	0x20000238
+ 8000a88:	20000274 	.word	0x20000274
  8000a8c:	20000034 	.word	0x20000034
- 8000a90:	20000244 	.word	0x20000244
+ 8000a90:	20000280 	.word	0x20000280
  8000a94:	20000040 	.word	0x20000040
- 8000a98:	20000340 	.word	0x20000340
- 8000a9c:	2000013c 	.word	0x2000013c
- 8000aa0:	20000164 	.word	0x20000164
- 8000aa4:	20000354 	.word	0x20000354
- 8000aa8:	2000018c 	.word	0x2000018c
- 8000aac:	200001e0 	.word	0x200001e0
- 8000ab0:	2000031c 	.word	0x2000031c
+ 8000a98:	200003b8 	.word	0x200003b8
+ 8000a9c:	20000178 	.word	0x20000178
+ 8000aa0:	200001a0 	.word	0x200001a0
+ 8000aa4:	200003cc 	.word	0x200003cc
+ 8000aa8:	200001c8 	.word	0x200001c8
+ 8000aac:	2000021c 	.word	0x2000021c
+ 8000ab0:	20000358 	.word	0x20000358
  8000ab4:	20000118 	.word	0x20000118
 
 08000ab8 <SystemClock_Config>:
@@ -1731,12 +1731,12 @@ static void MX_ETH_Init(void) {
  8000c0a:	bf00      	nop
  8000c0c:	bd80      	pop	{r7, pc}
  8000c0e:	bf00      	nop
- 8000c10:	20000520 	.word	0x20000520
+ 8000c10:	20000598 	.word	0x20000598
  8000c14:	40028000 	.word	0x40028000
- 8000c18:	20000b20 	.word	0x20000b20
- 8000c1c:	20000480 	.word	0x20000480
- 8000c20:	200003e0 	.word	0x200003e0
- 8000c24:	200003a8 	.word	0x200003a8
+ 8000c18:	20000b98 	.word	0x20000b98
+ 8000c1c:	200004f8 	.word	0x200004f8
+ 8000c20:	20000458 	.word	0x20000458
+ 8000c24:	20000420 	.word	0x20000420
 
 08000c28 <MX_USART3_UART_Init>:
 /**
@@ -1801,7 +1801,7 @@ static void MX_USART3_UART_Init(void) {
  8000c6e:	bf00      	nop
  8000c70:	bd80      	pop	{r7, pc}
  8000c72:	bf00      	nop
- 8000c74:	200005d0 	.word	0x200005d0
+ 8000c74:	20000648 	.word	0x20000648
  8000c78:	40004800 	.word	0x40004800
 
 08000c7c <MX_USB_OTG_FS_PCD_Init>:
@@ -1875,7 +1875,7 @@ static void MX_USB_OTG_FS_PCD_Init(void) {
  8000cce:	bf00      	nop
  8000cd0:	bd80      	pop	{r7, pc}
  8000cd2:	bf00      	nop
- 8000cd4:	20000614 	.word	0x20000614
+ 8000cd4:	2000068c 	.word	0x2000068c
 
 08000cd8 <MX_GPIO_Init>:
 /**
@@ -2884,13 +2884,13 @@ LoopFillZerobss:
   ldr r0, =_sdata
  800123c:	20000000 	.word	0x20000000
   ldr r1, =_edata
- 8001240:	200001fc 	.word	0x200001fc
+ 8001240:	20000238 	.word	0x20000238
   ldr r2, =_sidata
  8001244:	08003688 	.word	0x08003688
   ldr r2, =_sbss
- 8001248:	200001fc 	.word	0x200001fc
+ 8001248:	20000238 	.word	0x20000238
   ldr r4, =_ebss
- 800124c:	20000b2c 	.word	0x20000b2c
+ 800124c:	20000ba4 	.word	0x20000ba4
 
 08001250 <ADC_IRQHandler>:
  * @retval None       
@@ -3024,9 +3024,9 @@ __weak HAL_StatusTypeDef HAL_InitTick(uint32_t TickPriority)
  80012e6:	3708      	adds	r7, #8
  80012e8:	46bd      	mov	sp, r7
  80012ea:	bd80      	pop	{r7, pc}
- 80012ec:	200001f0 	.word	0x200001f0
- 80012f0:	200001f8 	.word	0x200001f8
- 80012f4:	200001f4 	.word	0x200001f4
+ 80012ec:	2000022c 	.word	0x2000022c
+ 80012f0:	20000234 	.word	0x20000234
+ 80012f4:	20000230 	.word	0x20000230
 
 080012f8 <HAL_IncTick>:
  * @note This function is declared as __weak to be overwritten in case of other 
@@ -3052,8 +3052,8 @@ __weak void HAL_IncTick(void)
  8001310:	f85d 7b04 	ldr.w	r7, [sp], #4
  8001314:	4770      	bx	lr
  8001316:	bf00      	nop
- 8001318:	200001f8 	.word	0x200001f8
- 800131c:	20000b28 	.word	0x20000b28
+ 8001318:	20000234 	.word	0x20000234
+ 800131c:	20000ba0 	.word	0x20000ba0
 
 08001320 <HAL_GetTick>:
   * @note This function is declared as __weak to be overwritten in case of other 
@@ -3073,7 +3073,7 @@ __weak uint32_t HAL_GetTick(void)
  800132c:	f85d 7b04 	ldr.w	r7, [sp], #4
  8001330:	4770      	bx	lr
  8001332:	bf00      	nop
- 8001334:	20000b28 	.word	0x20000b28
+ 8001334:	20000ba0 	.word	0x20000ba0
 
 08001338 <HAL_Delay>:
   *       implementations in user file.
@@ -3126,7 +3126,7 @@ __weak void HAL_Delay(uint32_t Delay)
  8001376:	46bd      	mov	sp, r7
  8001378:	bd80      	pop	{r7, pc}
  800137a:	bf00      	nop
- 800137c:	200001f8 	.word	0x200001f8
+ 800137c:	20000234 	.word	0x20000234
 
 08001380 <__NVIC_SetPriorityGrouping>:
            In case of a conflict between priority grouping and available
@@ -6694,8 +6694,8 @@ HAL_StatusTypeDef HAL_RCC_ClockConfig(RCC_ClkInitTypeDef  *RCC_ClkInitStruct, ui
  80027e0:	40023c00 	.word	0x40023c00
  80027e4:	40023800 	.word	0x40023800
  80027e8:	08003660 	.word	0x08003660
- 80027ec:	200001f0 	.word	0x200001f0
- 80027f0:	200001f4 	.word	0x200001f4
+ 80027ec:	2000022c 	.word	0x2000022c
+ 80027f0:	20000230 	.word	0x20000230
 
 080027f4 <HAL_RCC_GetSysClockFreq>:
   *
@@ -6969,7 +6969,7 @@ uint32_t HAL_RCC_GetHCLKFreq(void)
  8002a0c:	f85d 7b04 	ldr.w	r7, [sp], #4
  8002a10:	4770      	bx	lr
  8002a12:	bf00      	nop
- 8002a14:	200001f0 	.word	0x200001f0
+ 8002a14:	2000022c 	.word	0x2000022c
 
 08002a18 <HAL_RCC_GetPCLK1Freq>:
   * @note   Each time PCLK1 changes, this function must be called to update the

@@ -5,8 +5,8 @@
  *      Author: carlo
  */
 
-#ifndef INC_EXERCISES_LIST01_H_
-#define INC_EXERCISES_LIST01_H_
+#ifndef INC_EXERCISES_LIST_H_
+#define INC_EXERCISES_LIST_H_
 
 #include "stdint.h"
 
@@ -52,4 +52,4 @@ void downsampleM (		int32_t * vectorIn,
 void invertir (			uint16_t * vector,
 						uint32_t longitud);
 
-#endif /* INC_EXERCISES_LIST01_H_ */
+#endif /* INC_EXERCISES_LIST_H_ */

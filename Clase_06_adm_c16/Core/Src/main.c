@@ -204,7 +204,7 @@ int main(void) {
 	asm_productoEscalar12(vectorIN_12b, vectorOUT_12b, 5, 4);
 
 	/********** ASM Pregunta 05 **********/
-	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05, sizeof(ASMvectorIN_P05) / sizeof(uint32_t));
+	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05, sizeof(ASMvectorIN_P05) / sizeof(uint16_t));
 	/********** ASM Pregunta 06 **********/
 
 	/********** ASM Pregunta 07 **********/

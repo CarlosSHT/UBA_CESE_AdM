@@ -150,18 +150,18 @@
     			udiv r5, r4, r2	@ r5 = r4/ longitud real
     			mul	r5, r5, r2	@ r5 = r5(division) * r2(longitud)
     			sub r4, r4, r5	@ r4 = r4 (long+ven-2) MOD r5 (div*long)
-				mov r5,4		@ r5 = 4 bytes
-	    		mul r5, r4, r5	@ r5 = indice = MOD * r7 ( 4bytes)
-	    		ldr r5, [r0, r5]
+				mov r5,2		@ r5 = 2 bytes
+	    		mul r5, r4, r5	@ r5 = indice = MOD * r7 ( 2bytes)
+	    		ldrh r5, [r0, r5]
     			add r6, r5
     			subs r7, 1
 	    		bne .asm_filtroVentana10_loop_2
 
-	    	mov r5, 4			@ r5 carga valor bytes en 32bits = 4
-	    	mul r5, r3, r5		@ r5 r3 ( indice actual vector ) * r5 ( 4 bytes )
-	    	sub r5, 4			@ r5 disminuido en 4 (4 bytes)
+	    	mov r5, 2			@ r5 carga valor bytes en 16bits = 2
+	    	mul r5, r3, r5		@ r5 r3 ( indice actual vector ) * r5 ( 2 bytes )
+	    	sub r5, 2			@ r5 disminuido en 2 (2 bytes)
 			udiv r6, r8			@ r6 = r6(acumulación) / r8(tamaño ventana)
-    		str r6,[r1,r5]		@ r6 vectorOut actualizado
+    		strh r6,[r1,r5]		@ r6 vectorOut actualizado
 			subs r3,1
     		bne .asm_filtroVentana10_loop_1
     	pop {r4-r8}

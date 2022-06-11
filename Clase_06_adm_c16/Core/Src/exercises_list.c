@@ -4,7 +4,7 @@
  *  Created on: 29 may. 2022
  *      Author: carlo
  */
-#include "exercises_list01.h"
+#include <exercises_list.h>
 
 /*
  * Ejercicio 01
