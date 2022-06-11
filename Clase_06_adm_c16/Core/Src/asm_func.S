@@ -179,7 +179,18 @@
 @   r1: * vectorOut
 @	r2:	longitud
 @
-
+.thumb_func
+    asm_pack32to16:
+    	push {r4}
+    	mov r4, 16
+    	.asm_pack32to16_loop:
+	    	ldr r3,[r0],4
+	    	lsr r3, r4
+	    	strh r3,[r1],2
+	    	subs r2, 1
+	    	bne .asm_pack32to16_loop
+    	pop {r4}
+    	bx lr
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

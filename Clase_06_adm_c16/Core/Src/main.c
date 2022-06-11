@@ -205,7 +205,9 @@ int main(void) {
 
 	/********** ASM Pregunta 05 **********/
 	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05, sizeof(ASMvectorIN_P05) / sizeof(uint16_t));
+
 	/********** ASM Pregunta 06 **********/
+	asm_pack32to16(ASMvectorIN_P06, ASMvectorOUT_P06, sizeof(ASMvectorIN_P06) / sizeof(uint32_t));
 
 	/********** ASM Pregunta 07 **********/
 
