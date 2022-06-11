@@ -5,15 +5,16 @@
 @ Simbolos exportados
 .global asm_svc
 .global asm_sum
-.global asm_zeros
-.global asm_productoEscalar32
-.global asm_productoEscalar16
-.global asm_productoEscalar12
-.global asm_filtroVentana10
-.global asm_pack32to16
-.global asm_max
-.global asm_downsampleM
-.global asm_invertir
+.global asm_zeros				@ Pregunta 1
+.global asm_productoEscalar32	@ Pregunta 2
+.global asm_productoEscalar16	@ Pregunta 3
+.global asm_productoEscalar12	@ Pregunta 4
+.global asm_filtroVentana10		@ Pregunta 5
+.global asm_pack32to16			@ Pregunta 6
+.global asm_max					@ Pregunta 7
+.global asm_downsampleM			@ Pregunta 8
+.global asm_invertir			@ Pregunta 9
+.global asm_testvector
 
 
 
@@ -121,12 +122,98 @@
         bx lr
 
 
-@ Preguntas 5-9
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Preguntas 5:
+@   void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn);
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2:	longitudVectorIn
+@
+.thumb_func
+    asm_filtroVentana10:
+    	push {r4-r8}
+    	mov r3, r2
+		@sub r3,1	@ longitud vector -1 Ejem: 100 elemnt => 0 - 99
+		mov r8, 3	@ r4 window size = 3
+    	.asm_filtroVentana10_loop_1:
+
+	    	mov r4, r8
+    		mov r7, r4
+			sub r4, 1		@ r4 carga tamaño ventana -1
+    		mov r6, 0
+	    	.asm_filtroVentana10_loop_2:
+
+    			add r4, r7, r3		@ r4 = (tamaño ventana -1) + (longitud dinamico vector -1)
+    			sub r4, 2
+    			udiv r5, r4, r2	@ r5 = r4/ longitud real
+    			mul	r5, r5, r2	@ r5 = r5(division) * r2(longitud)
+    			sub r4, r4, r5	@ r4 = r4 (long+ven-2) MOD r5 (div*long)
+				mov r5,4		@ r5 = 4 bytes
+	    		mul r5, r4, r5	@ r5 = indice = MOD * r7 ( 4bytes)
+	    		ldr r5, [r0, r5]
+    			add r6, r5
+    			subs r7, 1
+	    		bne .asm_filtroVentana10_loop_2
+
+	    	mov r5, 4			@ r5 carga valor bytes en 32bits = 4
+	    	mul r5, r3, r5		@ r5 r3 ( indice actual vector ) * r5 ( 4 bytes )
+	    	sub r5, 4			@ r5 disminuido en 4 (4 bytes)
+			udiv r6, r8			@ r6 = r6(acumulación) / r8(tamaño ventana)
+    		str r6,[r1,r5]		@ r6 vectorOut actualizado
+			subs r3,1
+    		bne .asm_filtroVentana10_loop_1
+    	pop {r4-r8}
+        bx lr
 
 
 
 
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Preguntas 6:
+@   void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2:	longitud
+@
 
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Preguntas 7:
+@   int32_t max (int32_t * vectorIn, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: longitud
+@
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Preguntas 8:
+@   void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2:	longitud
+@	r3:	N
+@
+
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Preguntas 9:
+@   void invertir (uint16_t * vector, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: * vector
+@   r1: longitud
+@
 .thumb_func
     asm_invertir:
     	push {r4} // longitud mitad
@@ -149,4 +236,15 @@
         pop {r6}
         pop {r5}
         pop {r4}
+        bx lr
+
+
+@ Pregunta 5
+.thumb_func
+    asm_testvector:
+    	mov r3,7
+    	.asm_testvector_loop:
+    		ldr r2,[r0],4
+    		subs r3,1
+    		bne .asm_testvector_loop
         bx lr

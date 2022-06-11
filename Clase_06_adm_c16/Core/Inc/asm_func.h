@@ -25,5 +25,11 @@ void asm_productoEscalar12(	uint16_t *vectorIn,
 						uint16_t escalar);
 
 
+void asm_filtroVentana10(	uint32_t * vectorIn,
+						uint32_t * vectorOut,
+						uint32_t longitudVectorIn);
+
 void asm_invertir(		uint16_t *vector,
 						int32_t longitud);
+
+void asm_testvector(uint32_t *vector);

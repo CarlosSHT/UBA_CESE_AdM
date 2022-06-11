@@ -6,12 +6,18 @@
  */
 #include "exercises_list01.h"
 
+/*
+ * Ejercicio 01
+ */
 void zeros(uint32_t *vector, uint32_t longitud) {
 	for (uint32_t var = 0; var < longitud; ++var) {
 		*(vector + var) = 0;
 	}
 }
 
+/*
+ * Ejercicio 02
+ */
 void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut,
 		uint32_t longitud, uint32_t escalar) {
 	for (uint32_t var = 0; var < longitud; ++var) {
@@ -19,6 +25,9 @@ void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut,
 	}
 }
 
+/*
+ * Ejercicio 03
+ */
 void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut,
 		uint32_t longitud, uint16_t escalar) {
 	for (uint32_t var = 0; var < longitud; ++var) {
@@ -26,6 +35,9 @@ void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut,
 	}
 }
 
+/*
+ * Ejercicio 04
+ */
 void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut,
 		uint32_t longitud, uint16_t escalar) {
 	uint32_t aux_val = 0;
@@ -40,6 +52,9 @@ void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut,
 
 // Segunda Parte Preguntas 5-9
 
+/*
+ * Ejercicio 05
+ */
 void filtroVentana10(uint16_t *vectorIn, uint16_t *vectorOut,
 		uint32_t longitudVectorIn) {
 	uint8_t nn_win = 10;	 // <- modify size
@@ -61,6 +76,9 @@ void filtroVentana10(uint16_t *vectorIn, uint16_t *vectorOut,
 	}
 }
 
+/*
+ * Ejercicio 06
+ */
 void pack32to16(int32_t *vectorIn, int16_t *vectorOut, uint32_t longitud) {
 	while (longitud > 0) {
 		*(vectorOut + (longitud - 1)) = *(vectorIn + (longitud - 1)) >> 16;
@@ -68,6 +86,9 @@ void pack32to16(int32_t *vectorIn, int16_t *vectorOut, uint32_t longitud) {
 	}
 }
 
+/*
+ * Ejercicio 07
+ */
 int32_t max(int32_t *vectorIn, uint32_t longitud) {
 	if (longitud < 1) {
 		return -1;
@@ -87,6 +108,9 @@ int32_t max(int32_t *vectorIn, uint32_t longitud) {
 	return pos;
 }
 
+/*
+ * Ejercicio 08
+ */
 void downsampleM(int32_t *vectorIn, int32_t *vectorOut, uint32_t longitud,
 		uint32_t N) {
 	uint32_t aux_inx_IN = 0, aux_inx_OUT = 0;
@@ -105,6 +129,9 @@ void downsampleM(int32_t *vectorIn, int32_t *vectorOut, uint32_t longitud,
 	}
 }
 
+/*
+ * Ejercicio 09
+ */
 void invertir(uint16_t *vector, uint32_t longitud) {
 	uint16_t aux_val;
 	uint32_t mid_long = longitud / 2, aux_idx = 0;

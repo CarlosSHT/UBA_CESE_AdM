@@ -22,6 +22,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "vars_ejercicios.h"
 #include "asm_func.h"
 /* USER CODE END Includes */
 
@@ -155,79 +156,65 @@ int main(void) {
 	MX_USART3_UART_Init();
 	MX_USB_OTG_FS_PCD_Init();
 	/* USER CODE BEGIN 2 */
-	uint32_t vectorIN_zeros_32bit[] = { 3253827241, 733923345, 119396060,
-			841052654, 4145934 };
 
-//  const uint32_t vectorIN_32b[]={3253827241,733923345,119396060,841052654,4145934};
-	uint32_t vectorIN_32b[] = { 2, 3, 4, 5, 6 };
-	uint32_t vectorOUT_32b[5] = { 0 };
+	/********** Pregunta 01 **********/
+	zeros(vectorIN_zeros_32bit, 3);
 
-	uint16_t vectorIN_16b[] = { 50000, 227, 23761, 2226, 5399 };
-	uint16_t vectorOUT_16b[5] = { 0 };
+	/********** Pregunta 02 **********/
+	productoEscalar32(vectorIN_32b, vectorOUT_32b, 4, 2);
 
-	uint16_t vectorIN_12b[] = { 327, 3442, 327, 2221, 1794 };
-	uint16_t vectorOUT_12b[5] = { 0 };
+	/********** Pregunta 03 **********/
+	productoEscalar16(vectorIN_16b, vectorOUT_16b, 3, 4);
 
-// Segunda parte
-	uint16_t vectorIN_P05[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295,
-			833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562,
-			1662, 1185, 1287, 1, 2728, 95, 2165, 1712, 2703, 1030, 1920, 2771,
-			1341, 1686, 2682, 610, 344, 2828, 478, 2679, 2924, 21, 2978, 2631,
-			2177, 292, 2784, 421, 1785, 1454, 2993, 1960, 1783, 1521, 2982, 533,
-			2880, 975, 473, 487, 1070, 595, 1689, 2377, 868, 365, 194, 2362,
-			2315, 1702, 2301, 1565, 1066, 2794, 306, 1537, 737, 2652, 2440, 748,
-			1515, 693, 531, 518, 905, 1398, 930, 2743, 2111, 161, 2419, 919,
-			2480, 388, 1499, 738, 890, 2644, 204, 1460, 2533, 751, 499, 2578,
-			394, 2411 };
-	uint16_t vectorOUT_P05[sizeof(vectorIN_P05) / sizeof(uint16_t)] = { 0 };
+	/********** Pregunta 04 **********/
+	productoEscalar12(vectorIN_12b, vectorOUT_12b, 5, 4);
 
-	int32_t vectorIN_P06[] = { 673442447, 1016059352, 152699397, 3917358632,
-			3255809211, 1112063115, 1623556123, 752698063, 3768095820,
-			1776671775 };
-	int16_t vectorOUT_P06[sizeof(vectorIN_P06) / sizeof(int32_t)] = { 0 };
+	/********** Pregunta 05 **********/
+	filtroVentana10(vectorIN_P05, vectorOUT_P05, sizeof(vectorIN_P05) / sizeof(uint16_t));
 
-
-	int32_t vectorIN_P07[] = { 673442447, 1016059352, 0x7FFFFFFF, 3917358632,
-			3255809211, 1112063115, 1623556123, 752698063, 3768095820,
-			1776671775 };
-
-
-	int32_t vectorIN_P08[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295,
-			833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562};
-	int32_t vectorOUT_P08[sizeof(vectorIN_P08) / sizeof(int32_t)] = { 0 };
-
-	uint16_t vectorIN_P09[] = { 947, 1111, 2026, 1362, 195, 2569, 757};//, 253, 295,
-//			833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562};
-//  zeros(&vectorIN_zeros_32bit, 3);
-
-//  productoEscalar32(&vectorIN_32b, &vectorOUT_32b, 4, 2);
-//
-//  productoEscalar16(&vectorIN_16b, &vectorOUT_16, 3, 4);
-//
-//  productoEscalar12(&vectorIN_12b, &vectorOUT_12b, 5, 4);
-
-	filtroVentana10(vectorIN_P05, vectorOUT_P05,
-			sizeof(vectorIN_P05) / sizeof(uint16_t));
-
+	/********** Pregunta 06 **********/
 	pack32to16(vectorIN_P06, vectorOUT_P06, sizeof(vectorIN_P06) / sizeof(uint32_t));
 
+	/********** Pregunta 07 **********/
 	int32_t posicion=0;
 	posicion= max(vectorIN_P07,  sizeof(vectorIN_P06) / sizeof(uint32_t));
 
+	/********** Pregunta 08 **********/
 	downsampleM(vectorIN_P08,vectorOUT_P08, sizeof(vectorIN_P08) / sizeof(int32_t), 0);
 
-//	invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
+	/********** Pregunta 09 **********/
+	invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
 
 
 	PrivilegiosSVC();
 
 	const uint32_t Resultado = asm_sum(5, 3);
 
+
+	/********** ASM Pregunta 01 **********/
 	asm_zeros(vectorIN_zeros_32bit, 3);
+
+	/********** ASM Pregunta 02 **********/
 	asm_productoEscalar32(vectorIN_32b, vectorOUT_32b, 4, 2);
+
+	/********** ASM Pregunta 03 **********/
 	asm_productoEscalar16(vectorIN_16b, vectorOUT_16b, 4, 2);
+
+	/********** ASM Pregunta 04 **********/
 	asm_productoEscalar12(vectorIN_12b, vectorOUT_12b, 5, 4);
+
+	/********** ASM Pregunta 05 **********/
+	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05, sizeof(ASMvectorIN_P05) / sizeof(uint32_t));
+	/********** ASM Pregunta 06 **********/
+
+	/********** ASM Pregunta 07 **********/
+
+	/********** ASM Pregunta 08 **********/
+
+	/********** ASM Pregunta 09 **********/
 	asm_invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
+
+//	asm_testvector(vectorIN_32b);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
