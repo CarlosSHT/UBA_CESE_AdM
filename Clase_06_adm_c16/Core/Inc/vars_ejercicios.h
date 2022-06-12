@@ -17,8 +17,6 @@
 uint32_t vectorIN_zeros_32bit[] = { 3253827241, 733923345, 119396060, 841052654,
 		4145934 };
 
-
-
 /*
  * Ejercicio 02:
  * 	void productoEscalar32 (uint32_t * vectorIn, uint32_t * vectorOut uint32_t longitud, uint32_t escalar);
@@ -30,8 +28,6 @@ uint32_t vectorIN_zeros_32bit[] = { 3253827241, 733923345, 119396060, 841052654,
 uint32_t vectorIN_32b[] = { 2, 3, 4, 5, 6 };
 uint32_t vectorOUT_32b[5] = { 0 };
 
-
-
 /*
  * Ejercicio 03:
  * 	void productoEscalar16 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
@@ -42,8 +38,6 @@ uint32_t vectorOUT_32b[5] = { 0 };
 uint16_t vectorIN_16b[] = { 50000, 227, 23761, 2226, 5399 };
 uint16_t vectorOUT_16b[5] = { 0 };
 
-
-
 /*
  * Ejercicio 04:
  * 	void productoEscalar12 (uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitud, uint16_t escalar);
@@ -53,8 +47,6 @@ uint16_t vectorOUT_16b[5] = { 0 };
  */
 uint16_t vectorIN_12b[] = { 327, 3442, 327, 2221, 1794 };
 uint16_t vectorOUT_12b[5] = { 0 };
-
-
 
 /**************Segunda Parte***************/
 
@@ -75,7 +67,6 @@ uint16_t vectorIN_P05[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295,
 		905, 1398, 930, 2743, 2111, 161, 2419, 919, 2480, 388, 1499, 738, 890,
 		2644, 204, 1460, 2533, 751, 499, 2578, 394, 2411 };
 uint16_t vectorOUT_P05[sizeof(vectorIN_P05) / sizeof(uint16_t)] = { 0 };
-
 
 uint16_t ASMvectorIN_P05[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295,
 		833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562,
@@ -98,8 +89,6 @@ int32_t ASMvectorIN_P06[] = { 673442447, 1016059352, 152699397, 3917358632,
 		3255809211, 1112063115, 1623556123, 752698063, 3768095820, 1776671775 };
 int16_t ASMvectorOUT_P06[sizeof(ASMvectorIN_P06) / sizeof(int32_t)] = { 0 };
 
-
-
 /*
  * Ejercicio 07:
  * 	int32_t max (int32_t * vectorIn, uint32_t longitud);
@@ -112,9 +101,7 @@ int32_t vectorIN_P07[] = { 673442447, 1016059352, 2147483647, 3917358632,
 //int32_t ASMvectorIN_P07[] = { 673442447, 1016059352, 2147483647, 3917358632,
 //		3255809211, 1112063115, 1623556123, 752698063, 3768095820, 1776671775 };
 
-int32_t ASMvectorIN_P07[] = { 67, 101, 214, 39,
-		32, 32, 16, 75, 37, 17 };
-
+int32_t ASMvectorIN_P07[] = { 67, 101, 214, 39, 32, 32, 16, 75, 37, 17 };
 
 /*
  * Ejercicio 08:
@@ -127,10 +114,9 @@ int32_t vectorIN_P08[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295, 833,
 		1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562 };
 int32_t vectorOUT_P08[sizeof(vectorIN_P08) / sizeof(int32_t)] = { 0 };
 
-int32_t ASMvectorIN_P08[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295, 833,
-		1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562 };
+int32_t ASMvectorIN_P08[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295,
+		833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562 };
 int32_t ASMvectorOUT_P08[sizeof(ASMvectorIN_P08) / sizeof(int32_t)] = { 0 };
-
 
 /*
  * Ejercicio 09:
@@ -141,5 +127,28 @@ int32_t ASMvectorOUT_P08[sizeof(ASMvectorIN_P08) / sizeof(int32_t)] = { 0 };
 //uint16_t vectorIN_P09[] = { 947, 1111, 2026, 1362, 195, 2569, 757, 253, 295,
 //		833, 1927, 415, 1873, 2189, 2651, 2265, 783, 2310, 1700, 2655, 2562 };
 uint16_t vectorIN_P09[] = { 947, 1111, 2026, 1362, 195, 2569, 757 };
+
+uint16_t ASMvectorIN_P09[] = { 947, 1111, 2026, 1362, 195, 2569, 757 };
+
+/*
+ * Ejercicio 09:
+ * 	void corr (int16_t * vectorX, int16_t * vectorY, int32_t * vectorCorr, uint32_t longitud);
+ *
+ * Entrada 1:		int16_t * vectorX
+ * Entrada 2:		int16_t * vectorY
+ * Salida:		uint16_t vectorIN_P09[]
+ *
+ */
+int16_t vectorX_P11[] = { 100, 84, 71, 59, 50, 42, 35, 30, 25, 21, 17, 15, 12,
+		10, 9, 7 };
+
+int16_t vectorY_P11[] = { 15, 12, 10, 9, 7, 100, 84, 71, 59, 50, 42, 35, 30, 25,
+		21, 17 };
+int64_t vectorCorr_P11[2 * (sizeof(vectorX_P11) / sizeof(int16_t)) - 1] = { 0 };
+// Resultado esperado en vectorCorr 1700, 3528, 5471, 7594, 9884, 12509, 15510,
+//									18942, 23024, 27755, 33322, 28710, 25031,
+//									21992, 19715, 18051, 15052, 12539, 10331,
+//									8473, 6868, 5542, 4310, 3269, 2335, 1408,
+//									599, 453, 328, 219, 105,
 
 #endif /* INC_VARS_EJERCICIOS_H_ */

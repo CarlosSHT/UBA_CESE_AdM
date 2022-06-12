@@ -96,12 +96,12 @@ int32_t max(int32_t *vectorIn, uint32_t longitud) {
 
 	int32_t max_val = 0;
 
-	uint32_t pos = longitud -1;
+	uint32_t pos = longitud - 1;
 
 	while (longitud > 0) {
-		if (*(vectorIn + longitud-1) > max_val) {
-			pos = longitud-1;
-			max_val = *(vectorIn + longitud-1);
+		if (*(vectorIn + longitud - 1) > max_val) {
+			pos = longitud - 1;
+			max_val = *(vectorIn + longitud - 1);
 		}
 		longitud--;
 	}
@@ -143,3 +143,22 @@ void invertir(uint16_t *vector, uint32_t longitud) {
 	}
 }
 
+/*
+ * Ejercicio 11
+ */
+void corr(int16_t *vectorX, int16_t *vectorY, int64_t *vectorCorr,
+		uint32_t longitud) {
+	int64_t min_index_l = ((int32_t) longitud - 1) * -1;
+	int64_t max_index_l = ((int32_t) longitud - 1);
+	int32_t accum = 0;
+	for (int l = min_index_l; l < max_index_l + 1; ++l) {
+		accum = 0;
+		for (int n = 0; n < longitud; ++n) {
+			if (n - l > -1 && n - l < longitud) {
+				accum = *(vectorX + n) * *(vectorY + n - l) + accum;
+			}
+		}
+		*(vectorCorr + (l + longitud - 1)) = accum;
+	}
+
+}

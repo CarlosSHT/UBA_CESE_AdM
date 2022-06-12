@@ -267,8 +267,8 @@
 .thumb_func
     asm_invertir:
     	push {r4} // longitud mitad
-    	push {r5}	// nro 2
-    	push {r6}	// nro 2
+    	push {r5}	// nro
+    	push {r6}	// nro
     	mov r5,2
     	mov r6,0
     	udiv r4,r1,r5
@@ -289,7 +289,7 @@
         bx lr
 
 
-@ Pregunta 5
+
 .thumb_func
     asm_testvector:
     	mov r3,7

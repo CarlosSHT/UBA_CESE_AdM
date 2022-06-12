@@ -173,23 +173,29 @@ int main(void) {
 	filtroVentana10(vectorIN_P05, vectorOUT_P05, sizeof(vectorIN_P05) / sizeof(uint16_t));
 
 	/********** Pregunta 06 **********/
-	pack32to16(vectorIN_P06, vectorOUT_P06, sizeof(vectorIN_P06) / sizeof(uint32_t));
+	pack32to16(vectorIN_P06, vectorOUT_P06,
+			sizeof(vectorIN_P06) / sizeof(uint32_t));
 
 	/********** Pregunta 07 **********/
-	int32_t posicion=0;
-	posicion= max(vectorIN_P07,  sizeof(vectorIN_P07) / sizeof(uint32_t));
+	int32_t posicion = 0;
+	posicion = max(vectorIN_P07, sizeof(vectorIN_P07) / sizeof(uint32_t));
 
 	/********** Pregunta 08 **********/
-	downsampleM(vectorIN_P08,vectorOUT_P08, sizeof(vectorIN_P08) / sizeof(int32_t), 3);
+	downsampleM(vectorIN_P08, vectorOUT_P08,
+			sizeof(vectorIN_P08) / sizeof(int32_t), 3);
 
 	/********** Pregunta 09 **********/
-	invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
+	invertir(vectorIN_P09,
+			(uint32_t) (sizeof(vectorIN_P09) / sizeof(uint16_t)));
 
+	/********** Pregunta 11 **********/
+	/** Premisa VectorX y VectorY tienen el mismo número de elementos **/
+	/** VectorCorrelación se cambia a **/
+	corr(vectorX_P11, vectorY_P11, vectorCorr_P11, sizeof(vectorX_P11) / sizeof(int16_t));
 
 	PrivilegiosSVC();
 
 	const uint32_t Resultado = asm_sum(5, 3);
-
 
 	/********** ASM Pregunta 01 **********/
 	asm_zeros(vectorIN_zeros_32bit, 3);
@@ -204,20 +210,25 @@ int main(void) {
 	asm_productoEscalar12(vectorIN_12b, vectorOUT_12b, 5, 4);
 
 	/********** ASM Pregunta 05 **********/
-	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05, sizeof(ASMvectorIN_P05) / sizeof(uint16_t));
+	asm_filtroVentana10(ASMvectorIN_P05, ASMvectorOUT_P05,
+			sizeof(ASMvectorIN_P05) / sizeof(uint16_t));
 
 	/********** ASM Pregunta 06 **********/
-	asm_pack32to16(ASMvectorIN_P06, ASMvectorOUT_P06, sizeof(ASMvectorIN_P06) / sizeof(uint32_t));
+	asm_pack32to16(ASMvectorIN_P06, ASMvectorOUT_P06,
+			sizeof(ASMvectorIN_P06) / sizeof(uint32_t));
 
 	/********** ASM Pregunta 07 **********/
-	int32_t ASMposicion=0;
-	ASMposicion= asm_max(ASMvectorIN_P07,  sizeof(ASMvectorIN_P07) / sizeof(uint32_t));
+	int32_t ASMposicion = 0;
+	ASMposicion = asm_max(ASMvectorIN_P07,
+			sizeof(ASMvectorIN_P07) / sizeof(uint32_t));
 
 	/********** ASM Pregunta 08 **********/
-	asm_downsampleM (ASMvectorIN_P08,ASMvectorOUT_P08, sizeof(ASMvectorIN_P08) / sizeof(int32_t), 3);
+	asm_downsampleM(ASMvectorIN_P08, ASMvectorOUT_P08,
+			sizeof(ASMvectorIN_P08) / sizeof(int32_t), 3);
 
 	/********** ASM Pregunta 09 **********/
-	asm_invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
+	asm_invertir(ASMvectorIN_P09,
+			(uint32_t) (sizeof(ASMvectorIN_P09) / sizeof(uint16_t)));
 
 //	asm_testvector(vectorIN_32b);
 	/* USER CODE END 2 */
