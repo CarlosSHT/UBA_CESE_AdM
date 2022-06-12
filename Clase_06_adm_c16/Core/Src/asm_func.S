@@ -123,7 +123,7 @@
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C"  Preguntas 5:
+@ Prototipo en "C"  Pregunta 5:
 @   void filtroVentana10(uint16_t * vectorIn, uint16_t * vectorOut, uint32_t longitudVectorIn);
 @
 @ Parametros recibidos:
@@ -171,7 +171,7 @@
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C"  Preguntas 6:
+@ Prototipo en "C"  Pregunta 6:
 @   void pack32to16 (int32_t * vectorIn, int16_t *vectorOut, uint32_t longitud);
 @
 @ Parametros recibidos:
@@ -182,30 +182,48 @@
 .thumb_func
     asm_pack32to16:
     	push {r4}
-    	mov r4, 16
+    	mov r4, 16			@ bits a desplazar a la derecha
     	.asm_pack32to16_loop:
-	    	ldr r3,[r0],4
-	    	lsr r3, r4
-	    	strh r3,[r1],2
-	    	subs r2, 1
-	    	bne .asm_pack32to16_loop
+	    	ldr r3,[r0],4	@ carga r0 a r3 en 32 bits
+	    	lsr r3, r4		@ desplazamiento a derecha
+	    	strh r3,[r1],2	@ carga r3 a r1 en 16 bits
+	    	subs r2, 1		@ longitud -1
+	    	bne .asm_pack32to16_loop	@ fin del bucle
     	pop {r4}
     	bx lr
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C"  Preguntas 7:
+@ Prototipo en "C"  Pregunta 7:
 @   int32_t max (int32_t * vectorIn, uint32_t longitud);
 @
 @ Parametros recibidos:
 @   r0: * vectorIn
 @   r1: longitud
 @
-
+.thumb_func
+    asm_max:
+		push {r4,r5}
+		mov r5, r1	@ copia valor longitud
+		mov r4, r2	@ maximo valor anterior
+		mov r3, r1 	@ posicion max valor
+    	.asm_max_loop:
+    		ldr	r2, [r0], 4
+    		cmp r4, r2
+    		bpl .asm_max_r2max
+    		mov r4, r2
+    		mov r3, r1
+    		.asm_max_r2max:
+    		subs r1, 1
+    		bne .asm_max_loop
+		sub r3, r5, r3
+		mov r0, r3
+		pop {r4,r5}
+    	bx lr
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C"  Preguntas 8:
+@ Prototipo en "C"  Pregunta 8:
 @   void downsampleM (int32_t * vectorIn, int32_t * vectorOut, uint32_t longitud, uint32_t N);
 @
 @ Parametros recibidos:
@@ -214,11 +232,32 @@
 @	r2:	longitud
 @	r3:	N
 @
+.thumb_func
+    asm_downsampleM:
+		push {r4,r5,r6}
+		mov r5, r2 	@ carga longitud en r5
+		.asm_downsampleM_loop:
+			sub r4, r5, r2
+			add r4, 1
+			udiv r6, r4, r3
+			mul r6, r6, r3
+			subs r6, r4, r6
+			beq .asm_downsampleM_noresiduo
+				@mul r5, r2, 4
+				@sub r5, 4
+				ldr r4, [r0]
+				str r4, [r1],4
+			.asm_downsampleM_noresiduo:
+			add r0, 4
+			subs r2,1
 
+			bne .asm_downsampleM_loop
+		pop {r4,r5,r6}
+    	bx lr
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C"  Preguntas 9:
+@ Prototipo en "C"  Pregunta 9:
 @   void invertir (uint16_t * vector, uint32_t longitud);
 @
 @ Parametros recibidos:

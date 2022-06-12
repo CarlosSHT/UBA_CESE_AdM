@@ -96,14 +96,14 @@ int32_t max(int32_t *vectorIn, uint32_t longitud) {
 
 	int32_t max_val = 0;
 
-	uint32_t index = 0, pos = 0;
+	uint32_t pos = longitud -1;
 
-	while (index < longitud) {
-		if (*(vectorIn + index) > max_val) {
-			pos = index;
-			max_val = *(vectorIn + index);
+	while (longitud > 0) {
+		if (*(vectorIn + longitud-1) > max_val) {
+			pos = longitud-1;
+			max_val = *(vectorIn + longitud-1);
 		}
-		index++;
+		longitud--;
 	}
 	return pos;
 }

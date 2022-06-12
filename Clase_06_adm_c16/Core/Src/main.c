@@ -177,10 +177,10 @@ int main(void) {
 
 	/********** Pregunta 07 **********/
 	int32_t posicion=0;
-	posicion= max(vectorIN_P07,  sizeof(vectorIN_P06) / sizeof(uint32_t));
+	posicion= max(vectorIN_P07,  sizeof(vectorIN_P07) / sizeof(uint32_t));
 
 	/********** Pregunta 08 **********/
-	downsampleM(vectorIN_P08,vectorOUT_P08, sizeof(vectorIN_P08) / sizeof(int32_t), 0);
+	downsampleM(vectorIN_P08,vectorOUT_P08, sizeof(vectorIN_P08) / sizeof(int32_t), 3);
 
 	/********** Pregunta 09 **********/
 	invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
@@ -210,8 +210,11 @@ int main(void) {
 	asm_pack32to16(ASMvectorIN_P06, ASMvectorOUT_P06, sizeof(ASMvectorIN_P06) / sizeof(uint32_t));
 
 	/********** ASM Pregunta 07 **********/
+	int32_t ASMposicion=0;
+	ASMposicion= asm_max(ASMvectorIN_P07,  sizeof(ASMvectorIN_P07) / sizeof(uint32_t));
 
 	/********** ASM Pregunta 08 **********/
+	asm_downsampleM (ASMvectorIN_P08,ASMvectorOUT_P08, sizeof(ASMvectorIN_P08) / sizeof(int32_t), 3);
 
 	/********** ASM Pregunta 09 **********/
 	asm_invertir( vectorIN_P09,(uint32_t)  (sizeof(vectorIN_P09) / sizeof(uint16_t)));
