@@ -302,41 +302,46 @@
 @
 .thumb_func
     asm_corr:
-    	push {r4,r5,r6,r7,r8,r9,r10}
-    	mov r4, #1
-    	.asm_corr_loop_l:	@ loop para l
-    		mov r5, r4		@ r5 es incremental desde 1
-    		mov r9, #0
-    		mov r10, #0
-    		.asm_corr_loop_2:	@ loop para l
-    			@subs r6, r5, #2	@ verifica si hay mas de 2 elementos
-    			sub r6, r3, r5
-    			@add r6, #1
-				ldr r7,[r0,r6,LSL 1]
-				adds r6, r6, #2
-				cmp r3, r6
-				it mi
-					andmi r7, r7, #0x00FF
+    	push {r4,r5,r6,r7,r8,r9}
+		@ r4 tendrá valor minimo de l = -15
+		@ r5 sera una copia de longitud que variará
+		@ r6 es el longitud - r5
+		@ r7 tendrá el valor de vectorX
+		@ r8 tendrá el valor de vectorY
+		@ r9 acumulador
+		sub r4, r3, 1
+		neg r4, r4
 
-				ldr r8,[r1,r10, LSL 1]
-				add r10, #2
-				smuad r6, r7, r8
-				add r9, r6
+		.asm_corr_loop_l:
+			mov r5, r3
+			mov r9, #0
+			.asm_corr_loop_n:
 
 
-    			sub r5, #2
-    			mov r6, #0
-    			cmp r6, r5
-    			bmi .asm_corr_loop_2	@ loop para l
+				sub r6, r3, r5				@ r6= r3-r5  (16-15)
+				ldrh r7, [r0, r6, LSL 1]	@ vectorX
 
-    		add r4, #1
-    		cmp r4, r3
-    		bmi .asm_corr_loop_l
+				subs r6, r6, r4				@ n-l  r6 =  r6- r4
+				ldrh r8, [r1, r6, LSL 1]	@ vectorY
+				@ 1er caso N(egativo)=0 osea es positivo o 0
 
+				it pl
+					subspl r6, r3, r6 @ 1er caso2 r3-r6 sigue siendo N=0 osea positivo o 0
 
+				subs r6, #1
+				itt pl
+					mulpl r8, r7, r8
+					addpl r9, r8
 
+				subs r5, #1
+				bne .asm_corr_loop_n
 
-     	push {r4,r5,r6,r7,r8,r9,r10}
+			str r9, [r2], 4
+			add r4, #1
+			cmp r4, r3
+			bmi .asm_corr_loop_l
+
+     	push {r4,r5,r6,r7,r8,r9}
         bx lr
 
 
