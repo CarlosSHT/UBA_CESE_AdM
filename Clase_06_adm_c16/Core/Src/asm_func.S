@@ -14,6 +14,7 @@
 .global asm_max					@ Pregunta 7
 .global asm_downsampleM			@ Pregunta 8
 .global asm_invertir			@ Pregunta 9
+.global asm_corr
 .global asm_testvector
 
 
@@ -287,6 +288,60 @@
         pop {r5}
         pop {r4}
         bx lr
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Pregunta 11:
+@   void corr (int16_t * vectorX, int16_t * vectorY, int32_t * vectorCorr, uint32_t longitud);
+@
+@ Parametros recibidos:
+@   r0: * vectorX
+@   r1: * vectorY
+@   r2: * vectorCorr
+@   r3: longitud
+@
+.thumb_func
+    asm_corr:
+    	push {r4,r5,r6,r7,r8,r9,r10}
+    	mov r4, #1
+    	.asm_corr_loop_l:	@ loop para l
+    		mov r5, r4		@ r5 es incremental desde 1
+    		mov r9, #0
+    		mov r10, #0
+    		.asm_corr_loop_2:	@ loop para l
+    			@subs r6, r5, #2	@ verifica si hay mas de 2 elementos
+    			sub r6, r3, r5
+    			@add r6, #1
+				ldr r7,[r0,r6,LSL 1]
+				adds r6, r6, #2
+				cmp r3, r6
+				it mi
+					andmi r7, r7, #0x00FF
+
+				ldr r8,[r1,r10, LSL 1]
+				add r10, #2
+				smuad r6, r7, r8
+				add r9, r6
+
+
+    			sub r5, #2
+    			mov r6, #0
+    			cmp r6, r5
+    			bmi .asm_corr_loop_2	@ loop para l
+
+    		add r4, #1
+    		cmp r4, r3
+    		bmi .asm_corr_loop_l
+
+
+
+
+     	push {r4,r5,r6,r7,r8,r9,r10}
+        bx lr
+
+
+
+
 
 
 

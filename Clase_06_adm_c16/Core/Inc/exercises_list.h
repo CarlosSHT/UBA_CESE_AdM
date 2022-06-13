@@ -54,10 +54,10 @@ void invertir (			uint16_t * vector,
 
 
 /** Premisa VectorX y VectorY tienen el mismo número de elementos **/
-/** Tipo de elemntos del VectorCorrelación se cambia a int64_t **/
+/** Tipo de elemntos del VectorCorrelación se cambia a int32_t **/
 void corr (		int16_t * vectorX,
 				int16_t * vectorY,
-				int64_t * vectorCorr,
+				int32_t * vectorCorr,
 				uint32_t longitud);
 
 #endif /* INC_EXERCISES_LIST_H_ */

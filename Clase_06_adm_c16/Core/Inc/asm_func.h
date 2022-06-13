@@ -44,4 +44,9 @@ void asm_downsampleM (	int32_t * vectorIn,
 void asm_invertir(		uint16_t *vector,
 						int32_t longitud);
 
+void asm_corr (			int16_t * vectorX,
+						int16_t * vectorY,
+						int32_t * vectorCorr,
+						uint32_t longitud);
+
 void asm_testvector(uint32_t *vector);

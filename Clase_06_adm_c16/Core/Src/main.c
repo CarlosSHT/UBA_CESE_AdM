@@ -181,16 +181,14 @@ int main(void) {
 	posicion = max(vectorIN_P07, sizeof(vectorIN_P07) / sizeof(uint32_t));
 
 	/********** Pregunta 08 **********/
-	downsampleM(vectorIN_P08, vectorOUT_P08,
-			sizeof(vectorIN_P08) / sizeof(int32_t), 3);
+	downsampleM(vectorIN_P08, vectorOUT_P08, sizeof(vectorIN_P08) / sizeof(int32_t), 3);
 
 	/********** Pregunta 09 **********/
-	invertir(vectorIN_P09,
-			(uint32_t) (sizeof(vectorIN_P09) / sizeof(uint16_t)));
+	invertir(vectorIN_P09, (uint32_t) (sizeof(vectorIN_P09) / sizeof(uint16_t)));
 
 	/********** Pregunta 11 **********/
 	/** Premisa VectorX y VectorY tienen el mismo número de elementos **/
-	/** VectorCorrelación se cambia a **/
+	/** VectorCorrelación se cambia a 32bits **/
 	corr(vectorX_P11, vectorY_P11, vectorCorr_P11, sizeof(vectorX_P11) / sizeof(int16_t));
 
 	PrivilegiosSVC();
@@ -227,8 +225,10 @@ int main(void) {
 			sizeof(ASMvectorIN_P08) / sizeof(int32_t), 3);
 
 	/********** ASM Pregunta 09 **********/
-	asm_invertir(ASMvectorIN_P09,
-			(uint32_t) (sizeof(ASMvectorIN_P09) / sizeof(uint16_t)));
+	asm_invertir(ASMvectorIN_P09, (uint32_t) (sizeof(ASMvectorIN_P09) / sizeof(uint16_t)));
+
+	/********** ASM Pregunta 11 **********/
+	asm_corr(ASMvectorX_P11, ASMvectorY_P11, ASMvectorCorr_P11, sizeof(ASMvectorX_P11) / sizeof(int16_t));
 
 //	asm_testvector(vectorIN_32b);
 	/* USER CODE END 2 */

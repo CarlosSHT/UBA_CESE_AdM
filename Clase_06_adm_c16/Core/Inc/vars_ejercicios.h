@@ -144,7 +144,14 @@ int16_t vectorX_P11[] = { 100, 84, 71, 59, 50, 42, 35, 30, 25, 21, 17, 15, 12,
 
 int16_t vectorY_P11[] = { 15, 12, 10, 9, 7, 100, 84, 71, 59, 50, 42, 35, 30, 25,
 		21, 17 };
-int64_t vectorCorr_P11[2 * (sizeof(vectorX_P11) / sizeof(int16_t)) - 1] = { 0 };
+int32_t vectorCorr_P11[2 * (sizeof(vectorX_P11) / sizeof(int16_t)) - 1] = { 0 };
+
+int16_t ASMvectorX_P11[] = { 100, 84, 71, 59, 50, 42, 35, 30, 25, 21, 17, 15, 12,
+		10, 9, 7 };
+
+int16_t ASMvectorY_P11[] = { 15, 12, 10, 9, 7, 100, 84, 71, 59, 50, 42, 35, 30, 25,
+		21, 17 };
+int32_t ASMvectorCorr_P11[2 * (sizeof(ASMvectorX_P11) / sizeof(int16_t)) - 1] = { 0 };
 // Resultado esperado en vectorCorr 1700, 3528, 5471, 7594, 9884, 12509, 15510,
 //									18942, 23024, 27755, 33322, 28710, 25031,
 //									21992, 19715, 18051, 15052, 12539, 10331,

@@ -146,7 +146,7 @@ void invertir(uint16_t *vector, uint32_t longitud) {
 /*
  * Ejercicio 11
  */
-void corr(int16_t *vectorX, int16_t *vectorY, int64_t *vectorCorr,
+void corr(int16_t *vectorX, int16_t *vectorY, int32_t *vectorCorr,
 		uint32_t longitud) {
 	int64_t min_index_l = ((int32_t) longitud - 1) * -1;
 	int64_t max_index_l = ((int32_t) longitud - 1);
