@@ -302,7 +302,7 @@
 @
 .thumb_func
     asm_corr:
-    	push {r4,r5,r6,r7,r8,r9}
+    	push {r4,r5,r6,r7,r8,r9,r10}
 		@ r4 tendrá valor minimo de l = -15
 		@ r5 sera una copia de longitud que variará
 		@ r6 es el longitud - r5
@@ -319,21 +319,32 @@
 
 
 				sub r6, r3, r5				@ r6= r3-r5  (16-15)
-				ldrh r7, [r0, r6, LSL 1]	@ vectorX
+				ldr r7, [r0, r6, LSL 1]	@ vectorX
+				cmp r6, #1
+				it eq
+					andeq r7, r7, #0x00FF
+				sub r10, r6, r4				@ n-l  r6 =  r6- r4
+				ldr r8, [r1, r10, LSL 1]	@ vectorY
+				@ 1er caso N(egativo)=0 osea es positivo o 0
+
+				sub r10, r3, r10
+				cmp r10, #1
+				it eq
+					andeq r8, r8, #0x00FF
+
+
 
 				subs r6, r6, r4				@ n-l  r6 =  r6- r4
-				ldrh r8, [r1, r6, LSL 1]	@ vectorY
-				@ 1er caso N(egativo)=0 osea es positivo o 0
 
 				it pl
 					subspl r6, r3, r6 @ 1er caso2 r3-r6 sigue siendo N=0 osea positivo o 0
 
 				subs r6, #1
 				itt pl
-					mulpl r8, r7, r8
+					smuadpl r8, r7, r8
 					addpl r9, r8
 
-				subs r5, #1
+				subs r5, #2
 				bne .asm_corr_loop_n
 
 			str r9, [r2], 4
