@@ -321,31 +321,65 @@
 				sub r6, r3, r5				@ r6= r3-r5  (16-15)
 				ldr r7, [r0, r6, LSL 1]	@ vectorX
 				cmp r6, #1
-				it eq
-					andeq r7, r7, #0x00FF
-				sub r10, r6, r4				@ n-l  r6 =  r6- r4
+				itt eq
+					lsleq r7, r7, #16
+					lsreq r7, r7, #16
+					@andeq r7, r7, #0x00FF	@ termino de obtener r7
+
+				@ ¿ cuando obtengo r8 (r1) vector y?
+
+				@ 1° cuando tengo n-l > tamaño vector(r3)-1: no me interesa
+				@ 2  cuando tengo n-l < -1: no me interesa
+				@
+				@ obtnego r10 que tiene el valor de n-l
+				sub r10, r6, r4				@ n(r6)-l(r4)
+
+				cmp r10,r3
+				bpl .asm_corr_finciclo
+
+				sub r10, r6, r4				@ n(r6)-l(r4)
+				add r10, #1
+				cmp r10, 0
+				bmi .asm_corr_finciclo
+
+				@ carga en bruto 2 bytes en r8 (vector y)
+				sub r10, r6, r4				@ n(r6)-l(r4)
 				ldr r8, [r1, r10, LSL 1]	@ vectorY
-				@ 1er caso N(egativo)=0 osea es positivo o 0
-
-				sub r10, r3, r10
-				cmp r10, #1
-				it eq
-					andeq r8, r8, #0x00FF
 
 
+				@ casos especiale al inicio y al fin modifican r8
+								@sub r10, r3, r5   @ r10 toma el valor de n (0-15) que incrementa +2 cada vez
+				@ FINAL si n+1-l>r3 todo se borra pero esto ya deberia estar cubierto
+				@ entonces es si n+1-l==r3 entonces ahi se corta el r8
+				sub r10, r6, r4				@ n(r6)-l(r4)
+				add r10, #1
+				cmp r10, r3
+				itt eq
+					lsleq r8, r8, #16
+					lsreq r8, r8, #16
+					@andeq r8, r8, #0x00FF	@ termino de obtener r8
 
-				subs r6, r6, r4				@ n-l  r6 =  r6- r4
+				@ INICIO
+				@ Si n-l==-1 > aplicar mascara
+				@ n-l+1==0 aplicar
+				@sub r10, r6, r4				@ n(r6)-l(r4)	repetido linea 352
+				@add r10, #1									repetido linea 353
+				cmp r10, 0
+				itt eq
+					lsreq r8, r8, #16
+					lsleq r8, r8, #16
+					@andeq r8, r8, #0x00FF	@ termino de obtener r8
 
-				it pl
-					subspl r6, r3, r6 @ 1er caso2 r3-r6 sigue siendo N=0 osea positivo o 0
+				smuad r8, r7, r8
+				add r9, r8
 
-				subs r6, #1
-				itt pl
-					smuadpl r8, r7, r8
-					addpl r9, r8
 
-				subs r5, #2
-				bne .asm_corr_loop_n
+
+				.asm_corr_finciclo:
+				mov r10, 0
+				sub r5, #2
+				cmp r10, r5
+				bmi .asm_corr_loop_n
 
 			str r9, [r2], 4
 			add r4, #1
