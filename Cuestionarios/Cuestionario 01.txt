@@ -10,64 +10,119 @@ Cortex M - Destinado a microcontroladores, de bajo costo y menor consumo en comp
 Cortex M
 1.	Describa brevemente las diferencias entre las familias de procesadores Cortex M0, M3 y M4.
 
-Arquitecturas diferentes entre las familias M0 (Von Neumann), M3 (Harvard) y M4 (Harvard).
-La familia M0 es de bajo consumo a diferencia de M3 y M4, por otro lado, la familia M4 puede implementar bien el sistema RTOS en cambio el M0 realiza implementaciones por software.
-Poseen diferentes tamaños de instrucción en M0 de 16 bits y en M4 con capacidad de 32 bits
+	Arquitecturas diferentes entre las familias M0 (Von Neumann), M3 (Harvard) y M4 (Harvard).
+	La familia M0 es de bajo consumo a diferencia de M3 y M4, por otro lado, la familia M4 puede implementar bien el sistema RTOS en cambio el M0 realiza implementaciones por software.
+	Poseen diferentes tamaños de instrucción en M0 de 16 bits y en M4 con capacidad de 32 bits
 
 2.	¿Por qué se dice que el set de instrucciones Thumb permite mayor densidad de código? Explique
 
-Debido a que se añaden instrucciones de 16 bits lo que permite tener mayor cantidad de código, es decir tener mayor densidad. 
+	Debido a que se añaden instrucciones de 16 bits lo que permite tener mayor cantidad de código, es decir tener mayor densidad. 
 
 3.	¿Qué entiende por arquitectura load-store? ¿Qué tipo de instrucciones no posee este tipo de arquitectura?
 
-Las instrucciones no pueden realizar operaciones directamente al área de memoria, en cambio, accede a los datos a traves de dos registros que se encargan de bajar de la memoria al registro y posteriomente subir del registro a la memoria.
+	Las instrucciones no pueden realizar operaciones directamente al área de memoria, en cambio, accede a los datos a traves de dos registros que se encargan de bajar de la memoria al registro y posteriomente subir del registro a la memoria.
 
 4.	¿Cómo es el mapa de memoria de la familia?
 
-Tiene un tamaño acorde a la capacidad obtenida al ser de 32bits (2^32=4GB). Las areas de memoria que posee son para el código (flash), memoria ram, memoría de periféricos, SRAM externa, sistema
-En el mapa de memoria se encuentra todo "mapeado" es decir se podría configurar y obtener completamente el sistema, por ejemplo, los periféricos
+	Tiene un tamaño acorde a la capacidad obtenida al ser de 32bits (2^32=4GB). Las areas de memoria que posee son para el código (flash), memoria ram, memoría de periféricos, SRAM externa, sistema
+	En el mapa de memoria se encuentra todo "mapeado" es decir se podría configurar y obtener completamente el sistema, por ejemplo, los periféricos
 
 5.	¿Qué ventajas presenta el uso de los “shadowed pointers” del PSP y el MSP?
 
-Presenta ventajas para realizar la implementación de sistemas operativos en tiempo real
+	Presenta ventajas para realizar la implementación de sistemas operativos en tiempo real
 
 6.	Describa los diferentes modos de privilegio y operación del Cortex M, sus relaciones y como se conmuta de uno al otro. Describa un ejemplo en el que se pasa del modo privilegiado a no priviligiado y nuevamente a privilegiado.
 
-Tareas en modo privilegiado tiene acceso total, en cambio el modo no privilegiado debe pedir permisos al sistema operativo lo cual brinda un aislamiento y protege el sistema.
+	Tareas en modo privilegiado tiene acceso total, en cambio el modo no privilegiado debe pedir permisos al sistema operativo lo cual brinda un aislamiento y protege el sistema.
 
 
 7.	¿Qué se entiende por modelo de registros ortogonal? Dé un ejemplo
 
-Casi todos los registros son para uso de proposito general que funcionan como parametros para las instrucciones.
+	Casi todos los registros son para uso de proposito general que funcionan como parametros para las instrucciones.
 
 8.	¿Qué ventajas presenta el uso de intrucciones de ejecución condicional (IT)? Dé un ejemplo
+	
+	Permite realizar una funcionalidad parecida a la sentencia if con limitantes en el número de instrucciones a realizar.
+
 9.	Describa brevemente las excepciones más prioritarias (reset, NMI, Hardfault).
+
+	Son excepciones de valor fijo negativo no configurables:
+	*-2 NMI son excepciones que pueden ser generadas por los perifericos del microcontrolador o por una fuente externa. Puede generar un evento de wakeup para activarlo desde el modo dormido.
+	 -1 Hardfault: Viene activado por defecto y permite la detección de varios tipos de falla (Bus Fault, Usage Fault, and Memory Management Fault los cuales vienen desactivados), ello permite depurar con facilidad problemas en el software.
+	 -3	Reset: Es la excepción de mayor prioridad y es de tipo especial. Luego de ser energizado el microcontrolador esta excepción es llamada.
+	
 10.	Describa las funciones principales de la pila. ¿Cómo resuelve la arquitectura el llamado a funciones y su retorno?
+	
+	*Guardan la dirección del programa y recuperan de la pila por metodo FIFO
+	
 11.	Describa la secuencia de reset del microprocesador.
+	
+	*
+	
 12.	¿Qué entiende por “core peripherals”? ¿Qué diferencia existe entre estos y el resto de los periféricos?
+
+	*
+
 13.	¿Cómo se implementan las prioridades de las interrupciones? Dé un ejemplo
+
+	*
+
 14.	¿Qué es el CMSIS? ¿Qué función cumple? ¿Quién lo provee? ¿Qué ventajas aporta?
+	
+	Es una capa de abstracción realizador por ARM para Cortex el cual tiene como función permitir la portabilidad entre diversos hardwares basados en Cortex.
+	Otras ventajas es la estandarización de funciones, acceso a registros importantes como el NVIC y el Systick, abarca varias areas como RTOS, DSP, además del acceso al Debug y drivers genéricos.
+	
 15.	Cuando ocurre una interrupción, asumiendo que está habilitada ¿Cómo opera el microprocesador para atender a la subrutina correspondiente? Explique con un ejemplo
+
+	*
+
 17. ¿Cómo cambia la operación de stacking al utilizar la unidad de punto flotante?
  
-
+	*
+ 
 16.	Explique las características avanzadas de atención a interrupciones: tail chaining y late arrival.
+
+	*
+	
 17.	¿Qué es el systick? ¿Por qué puede afirmarse que su implementación favorece la portabilidad de los sistemas operativos embebidos?
+
+	El Systick (system tick timer) es una interrupción periodica que sirve como base al Sistema operativo, ya que los microprocesadores Cortex M3 y M4 han sido diseñados para el soporte de SO. Esto permite la portabilidad entre microprocesadores y no depender estrictamente de la frecuencia de reloj del integrado.
+
 18.	¿Qué funciones cumple la unidad de protección de memoria (MPU)?
 
-Sirve de protección a areas definidas que ante algún error o ejecución intencionada no provoque un fallo en el sistema. Las areas del mapa de memoria fueron asignadas y cada tarea solo tenga acceso a su area asignada.
+	Sirve de protección a areas definidas que ante algún error o ejecución intencionada no provoque un fallo en el sistema. Las areas del mapa de memoria fueron asignadas y cada tarea solo tenga acceso a su area asignada.
 
 19.	¿Cuántas regiones pueden configurarse como máximo? ¿Qué ocurre en caso de haber solapamientos de las regiones? ¿Qué ocurre con las zonas de memoria no cubiertas por las regiones definidas?
+
+	*
+
 20.	¿Para qué se suele utilizar la excepción PendSV? ¿Cómo se relaciona su uso con el resto de las excepciones? Dé un ejemplo
+
+	*
+
 21.	¿Para qué se suele utilizar la excepción SVC? Expliquelo dentro de un marco de un sistema operativo embebido.
 
+	*El supervisor de llamadas se utiliza para generar una transición entre modo no privilegiado a modo privilegiado.
+	Una tarea que corre en modo no privilegiado puede solicitar un permiso al SO el cual ejecuta la excepción SVC llevando la tarea de no privilegiado a con privilegios.
 
 ISA
 1.	¿Qué son los sufijos y para qué se los utiliza? Dé un ejemplo
+
+	Permite la carga y el guardado de registros en diferentes tamaños a 32bits, como 16bits y 8 bits.
+
 2.	¿Para qué se utiliza el sufijo ‘s’? Dé un ejemplo
+
+	Para habilitar los flags de estados como N (negativo), Z (cero), C (carry), V (overflow), Q (saturación).
+
 3.	¿Qué utilidad tiene la implementación de instrucciones de aritmética saturada? Dé un ejemplo con operaciones con datos de 8 bits.
 
-Estanca el incremento o decremento de un valor a fin de que no exista un evento de desborde (overflow), es decir, pone topes superior e inferior. Por ejemplo es utilizado para el procesamiento de señales de audio donde si existiese un desborde se generaria un audio erroneo.
+	Estanca el incremento o decremento de un valor a fin de que no exista un evento de desborde (overflow), es decir, pone topes superior e inferior. Por ejemplo es utilizado para el procesamiento de señales de audio donde si existiese un desborde se generaria un audio erroneo.
 
 4.	Describa brevemente la interfaz entre assembler y C ¿Cómo se reciben los argumentos de las funciones? ¿Cómo se devuelve el resultado? ¿Qué registros deben guardarse en la pila antes de ser modificados?
+
+	Los primero 4 argumentos se reciben en registros r0, r1, r2 y r3, estos deben guardarse en la pila con las instrucciones PUSH y POP antes querer utilizarlos, el resultado se devuelve en el registro R0.
+
 5.	¿Qué es una instrucción SIMD? ¿En qué se aplican y que ventajas reporta su uso? Dé un ejemplo.
+
+	Es una instrucción singular que permite la operación de multiples datos alojados en un registro de 32 bits ( datos pueden ser 8bits o 16 bits ).
+	La ventaja principal es la reducción del tiempo de procesamiento de datos, utilizado por ejemplo en DSP.
