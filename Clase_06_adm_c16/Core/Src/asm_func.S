@@ -56,7 +56,7 @@
         @ push {lr} ... pop {pc}
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-@ Prototipo en "C":
+@ Prototipo en "C"  Pregunta 1:
 @   void asm_zeros (uint32_t *vector, uint32_t longitud);
 @
 @ Parametros recibidos:
@@ -74,6 +74,18 @@
         bne .asm_zeros_loop
         bx lr
 
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Pregunta 2:
+@   void productoEscalar32(uint32_t *vectorIn, uint32_t *vectorOut, uint32_t longitud, uint32_t escalar)
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2:	longitud
+@	r3: escalar
+@
 .thumb_func
     asm_productoEscalar32:
     	push {r5}
@@ -86,6 +98,18 @@
         pop {r5}
         bx lr
 
+
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Pregunta 3:
+@   void productoEscalar16(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar)
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2:	longitud
+@	r3: escalar
+@
 .thumb_func
     asm_productoEscalar16:
     	push {r5}
@@ -99,8 +123,16 @@
         bx lr
 
 
-
-
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+@ Prototipo en "C"  Pregunta 4:
+@   void productoEscalar12(uint16_t *vectorIn, uint16_t *vectorOut, uint32_t longitud, uint16_t escalar)
+@
+@ Parametros recibidos:
+@   r0: * vectorIn
+@   r1: * vectorOut
+@	r2:	longitud
+@	r3: escalar
+@
 .thumb_func
     asm_productoEscalar12:
     	push {r5}
@@ -109,10 +141,11 @@
 	.asm_productoEscalar12_loop:
     	ldrh r5,[r0],2
     	mul r5,r5,r3
-    	subs r6,r5
-    	bpl .nosatura
-    	mov r5,4095
-    .nosatura:
+    	@subs r6,r5
+    	@bpl .nosatura
+    	@mov r5,4095
+    	usat r5, 12, r5
+    @.nosatura:
     	@mov r6,#0x0FFF
     	@and r5,r5,r6
     	strh r5,[r1],2
