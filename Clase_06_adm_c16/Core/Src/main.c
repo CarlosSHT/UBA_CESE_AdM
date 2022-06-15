@@ -147,7 +147,7 @@ int main(void) {
 	SystemClock_Config();
 
 	/* USER CODE BEGIN SysInit */
-
+	DWT->CTRL |= 1 << DWT_CTRL_CYCCNTENA_Pos;
 	/* USER CODE END SysInit */
 
 	/* Initialize all configured peripherals */
@@ -194,7 +194,6 @@ int main(void) {
 	PrivilegiosSVC();
 
 	const uint32_t Resultado = asm_sum(5, 3);
-
 	/********** ASM Pregunta 01 **********/
 	asm_zeros(vectorIN_zeros_32bit, 3);
 
@@ -228,9 +227,9 @@ int main(void) {
 	asm_invertir(ASMvectorIN_P09, (uint32_t) (sizeof(ASMvectorIN_P09) / sizeof(uint16_t)));
 
 	/********** ASM Pregunta 11 **********/
+	DWT->CYCCNT = 0;
 	asm_corr(ASMvectorX_P11, ASMvectorY_P11, ASMvectorCorr_P11, sizeof(ASMvectorX_P11) / sizeof(int16_t));
-
-//	asm_testvector(vectorIN_32b);
+	volatile uint32_t ciclos = DWT->CYCCNT;//	asm_testvector(vectorIN_32b);
 	/* USER CODE END 2 */
 
 	/* Infinite loop */
